@@ -60,7 +60,6 @@ IS_QUIET=`in_array "-q" "${CURRENT_MODES[*]}"`
 
 CPU_NUM=`cat /proc/cpuinfo|grep "model name"|wc -l`
 
-
 #资源包存放目录
 SOURCE_DIR=$CURRENT_DIR/source/
 
