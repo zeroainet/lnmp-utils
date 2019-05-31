@@ -64,6 +64,7 @@ CPU_NUM=`cat /proc/cpuinfo|grep "model name"|wc -l`
 SOURCE_DIR=$CURRENT_DIR/source/
 
 
+
 #模块存放目录
 SOURCE_MOD_DIR=${SOURCE_DIR}mod/
 
