@@ -54,6 +54,7 @@ if [ “$CURRENT_MODE” = "h" ];then
   		CURRENT_MODE="h"
 fi
 
+
 #是否不做yum 和date初始化
 IS_QUIET=`in_array "-q" "${CURRENT_MODES[*]}"`
 
