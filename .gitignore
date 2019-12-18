@@ -2,3 +2,8 @@
 .project
 .buildpath
 bak
+.DS_Store
+.pydevproject
+build
+tmp/*
+pkg/*

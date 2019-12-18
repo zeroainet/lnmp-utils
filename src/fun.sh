@@ -14,7 +14,7 @@ error(){
 }
 
 #添加用户
-user_add(){
+useradd(){
 	local _g=$1
 	local _u=$2
 
@@ -35,7 +35,7 @@ user_add(){
 }
 
 #生成目录
-create_dir(){
+createdir(){
         local _p;
 	if [ "$1" = "" ];then
 		return;
@@ -50,7 +50,7 @@ create_dir(){
 }
 
 #安装yum package
-yum_install(){
+yuminstall(){
 
 if [ "$IS_QUIET" = '0' ];then
 	local _i="";
@@ -100,7 +100,7 @@ install(){
 com_tmp_init(){
         if [ "$TMP_COM_DIR" != "" ];then
                 if [ ! -d $TMP_COM_DIR ];then
-                        create_dir $TMP_COM_DIR
+                        createdir $TMP_COM_DIR
                 else
                         chmod -R 777 $TMP_COM_DIR
                 fi
@@ -118,7 +118,7 @@ com_install(){
         do      
                 
                 COM_NAME=$_com
-                COM_DIR="$SOURCE_COM_DIR$_com/"
+                COM_DIR="$SOURCE_MODULE_DIR$_com/"
                 COM_PACKAGE_DIR="${COM_DIR}package/"
                 COM_SOURCE_FILE=""
                 COM_CONF_DIR="${COM_DIR}conf/"
@@ -196,7 +196,7 @@ com_init(){
 mod_tmp_init(){
         if [ "$TMP_MOD_DIR" != "" ];then
                 if [ ! -d $TMP_MOD_DIR ];then
-                        create_dir $TMP_MOD_DIR
+                        createdir $TMP_MOD_DIR
                 else
                         chmod -R 777 $TMP_MOD_DIR
                 fi
@@ -209,11 +209,11 @@ mod_install(){
         local _mod;
         for _mod in $1;
         do
-                MOD_DIR="${SOURCE_MOD_DIR}$_mod/"
+                MOD_DIR="${SOURCE_MODULE_DIR}$_mod/"
                 MOD_NAME=$_mod
                 MOD_PACKAGE_DIR="${MOD_DIR}package/"
                 MOD_CONF_DIR="${MOD_DIR}conf/"
-                MOD_INSTALL_SCRIPT="${SOURCE_MOD_DIR}$_mod/install.sh"
+                MOD_INSTALL_SCRIPT="${SOURCE_MODULE_DIR}$_mod/install.sh"
 
                 if [ ! -d $MOD_DIR ];then
                         error "模块${_mod}安装失败,目录${MOD_DIR}不存在!"

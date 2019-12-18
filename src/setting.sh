@@ -1,75 +1,20 @@
 #!/bin/bash
 
 
-in_array() {
-    var=$1
-    array=$2
-    if [[ "${array[@]/$var/}" != "${array[@]}" ]];then
-        echo "1"
-    else
-        echo "0"
-    fi
-}
 
-
-#解析参数
-ARGS=`getopt cmqp: $@`
-eval set -- "${ARGS}"
-
-#解析安装的组件或者模块数组
-arg=$(echo $@|awk -F '--' '{print $2}')
-arg=${arg%% }
-arg=${arg## }
-CURRENT_ARGS=($arg)
-
-
-#解析模块名和附加参数
-arg=$(echo $@|awk -F '--' '{print $1}')
-arg=${arg%% }
-arg=${arg## }
-
-#额外参数
-CURRENT_PARAMS=(`getopt cmqp $arg|awk -F '--' '{print $2}'|tr ',' " "`)
-
-#模式数组
-CURRENT_MODES=(`getopt cmqp $arg|awk -F '--' '{print $1}'`)
-
-#设置当前时间
-CURRENT_TIME=`date "+%Y%m%d"`
-
-
-#当前命令模式
-if [ `in_array "-c" "${CURRENT_MODES[*]}"` = "1" ];then	
-	CURRENT_MODE="c"  #组件安装模式
-elif [ `in_array "-m" "${CURRENT_MODES[*]}"` = "1" ];then
-	CURRENT_MODE="m"  #模块安装模式
-else
-	CURRENT_MODE="h"  #帮助模式
-fi
-
-#当前命令参数数组
-if [ “$CURRENT_MODE” = "h" ];then
-
-  		echo -e "ERROR: -c 或 -m 后必须接需要安装的组件或模块名称\n"
-  		CURRENT_MODE="h"
-fi
-
-
-#是否不做yum 和date初始化
-IS_QUIET=`in_array "-q" "${CURRENT_MODES[*]}"`
 
 CPU_NUM=`cat /proc/cpuinfo|grep "model name"|wc -l`
+
 
 #资源包存放目录
 SOURCE_DIR=$CURRENT_DIR/source/
 
 
-
 #模块存放目录
-SOURCE_MOD_DIR=${SOURCE_DIR}mod/
+SOURCE_MODULE_DIR=${SOURCE_DIR}mod/
 
 #组件存放目录
-SOURCE_COM_DIR=${SOURCE_DIR}com/
+SOURCE_MODULE_DIR=${SOURCE_DIR}com/
 
 #安装脚本源码目录
 SRC_DIR=$CURRENT_DIR/src/
@@ -85,7 +30,6 @@ TMP_MOD_DIR=${TMP_DIR}mod/
 
 #默认安装目录
 INSTALL_DIR=/usr/local/
-
 
 #数据目录
 DATA_DIR=/data/

@@ -7,30 +7,8 @@
 
 ALL_MODS=`ls $SOURCE_MOD_PATH|tr "\n" " "`
 ALL_COMS=`ls $SOURCE_COM_PATH|tr "\n" " "`
-		
-#帮助文件
-if [ "$CURRENT_MODE" = "h" ]; then
-    echo "AutoSetup  For CentOS 7"
-    echo "作者: King 邮箱：tinycn@qq.com"
-    echo "-h    可阅读详细帮助"
-    echo "-c       可直接安装组件!"
-    echo  "可安装组件:$ALL_COMS"
-    echo  "-m    可直接安装模块"
-    echo  "可安装模块: $ALL_MODS "
-    exit;
-fi
 
 if [ "$IS_QUIET" = '0' ];then
-
-    #检查是否以root身份运行脚本
-    if [ $(id -u) != "0" ]; then
-	    error  "必须以root身份运行该安装脚本!"
-    fi
-
-    #检查Linux版本
-    if [ `cat /etc/centos-release|grep -i centos|wc -l` -eq "0" ];then
-	    error "必须运行在CentOS系统下面!"	
-    fi
 
     #设置时区
     rm -f /etc/localtime
@@ -113,17 +91,17 @@ EOF
 
 
 #添加用户
-user_add www www
+useradd www www
 
 #创建data文件夹
-create_dir $DATA_DIR $DATA_BAK_DIR
+createdir $DATA_DIR $DATA_BAK_DIR
 
 #需要备份的data文件夹路径
-create_dir $DATA_BAK_DIR $DATA_WEB_DIR $DATA_DB_DIR $DATA_SCRIPT_DIR $DATA_CONF_DIR
+createdir $DATA_BAK_DIR $DATA_WEB_DIR $DATA_DB_DIR $DATA_SCRIPT_DIR $DATA_CONF_DIR
 
 #安装必须的包
-yum_install gd-devel flex bison file libtool libtool-libs autoconf ntp ntpdate net-snmp-devel  readline-devel net-snmp net-snmp-utils psmisc net-tools iptraf ncurses-devel  iptraf wget curl patch make gcc gcc-c++  kernel-devel unzip zip pigz
-yum_install pcre-devel openssl-devel
+yuminstall gd-devel flex bison file libtool libtool-libs autoconf ntp ntpdate net-snmp-devel  readline-devel net-snmp net-snmp-utils psmisc net-tools iptraf ncurses-devel  iptraf wget curl patch make gcc gcc-c++  kernel-devel unzip zip pigz
+yuminstall pcre-devel openssl-devel
 #同步时间
 ntpdate cn.pool.ntp.org
 hwclock --systohc
