@@ -623,6 +623,7 @@ if [ "$CURRENT_IS_QUIET" = '0' ];then
     rm -f /etc/localtime
     cp -f /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 
+
     #关闭selinux
     if [ -s /etc/selinux/config ]; then
 	    sed -i 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/selinux/config
