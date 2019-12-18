@@ -605,7 +605,17 @@ hasoption(){
 
 
 
-echo $CURRENT_IS_QUIET
+#创建data文件夹
+createdir $DATA_DIR $DATA_BAK_DIR
+
+#创建PKG文件夹
+createdir $PKG_DIR $PKG_COMPONENT_DIR $PKG_MODULE_DIR
+	
+#创建SOURCE文件夹
+createdir $SOURCE_DIR $SOURCE_COMPONENT_DIR $SOURCE_MODULE_DIR
+
+#需要备份的data文件夹路径
+createdir $DATA_BAK_DIR $DATA_WEB_DIR $DATA_DB_DIR $DATA_SCRIPT_DIR $DATA_CONF_DIR
 
 if [ "$CURRENT_IS_QUIET" = '0' ];then
 
@@ -689,16 +699,6 @@ EOF
 
 	#添加用户
 	user_add www www
-	
-	#创建data文件夹
-	createdir $DATA_DIR $DATA_BAK_DIR
-	
-
-	
-	#创建PKG文件夹
-	createdir $PKG_DIR $PKG_COMPONENT_DIR $PKG_MODULE_DIR
-	#需要备份的data文件夹路径
-	createdir $DATA_BAK_DIR $DATA_WEB_DIR $DATA_DB_DIR $DATA_SCRIPT_DIR $DATA_CONF_DIR
 
 	#安装必须的包
 	yum_install make gd-devel flex bison file libtool libtool-libs autoconf ntp ntpdate net-snmp-devel  readline-devel net-snmp net-snmp-utils psmisc net-tools iptraf ncurses-devel  iptraf wget curl patch make gcc gcc-c++  kernel-devel unzip zip pigz
@@ -709,9 +709,7 @@ EOF
 	hwclock --systohc
 fi
 
-#创建SOURCE文件夹
-createdir $SOURCE_DIR $SOURCE_COMPONENT_DIR $SOURCE_MODULE_DIR
-
+	
 com_install "${CURRENT_COMPONENTS[*]}"
 
 
