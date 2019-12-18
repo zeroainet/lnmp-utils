@@ -628,6 +628,7 @@ if [ "$CURRENT_IS_QUIET" = '0' ];then
 	    sed -i 's/SELINUX=enforcing/SELINUX=disabled/g' /etc/selinux/config
     fi
 
+
     #加载基础库
     if [ ! -f /etc/ld.so.conf.d/zeroai-utils.conf ];then
     cat >> /etc/ld.so.conf.d/zeroai-utils.conf <<EOT
