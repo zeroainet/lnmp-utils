@@ -52,6 +52,7 @@ showhelp(){
 	echo "-m|--mode=xxx        可直接安装模块"
 	echo "-o|--option          附加参数"
 	echo "-b|--build           创建内容"
+	echo "--no-clear           不清除临时文件夹"
 	exit
 }
 
@@ -75,6 +76,7 @@ optinit(){
 optinit
 
 CURRENT_IS_QUIET="0"
+CURRENT_IS_NO_CLEAR="0"
 while [ -n "$1" ]; do
     case "${1}" in
     	-q|--quiet)
@@ -103,6 +105,10 @@ while [ -n "$1" ]; do
         -b|--build)
         	shift;
         	CURRENT_IS_BUILD="1"
+        	;;
+        --no-clear)
+        	shift;
+        	CURRENT_IS_NO_CLEAR="1"
         	;;
         --)
         	shift;
@@ -286,16 +292,13 @@ createdir(){
 #安装yum package
 yum_install(){
 	local _i="";
-	local _wpn="";
-        for _i in $@;
-        do
-		_wpn=`yum list installed|grep $_i|wc -l`
-		#echo $_i$_wpn
-                if [ "$_wpn" -gt "0" ];then
-                	continue;
-				fi
-			yum -y install $_i;
-        	 
+	local _wpn=`yum list installed`;
+        for _i in $@; do
+        	echo $_i
+			if [ `echo $_wpn|tr " " "\n"|grep -e "^${_i}"|wc -l` -eq "0" ];then
+				echo $_i
+				yum -y install $_i;
+			fi
         done
 }
 
@@ -323,10 +326,7 @@ killport(){
 }
 #必须组件
 require(){
-        local _cd=$INSTALL_DIR"$1"
-        if [ ! -d $_cd ];then
-                com_install "$1";
-        fi
+	com_install "$1";
 }
 
 #安装
@@ -340,7 +340,7 @@ install(){
 
 #初始化组件临时文件
 com_tmp_init(){
-		echo "删除临时文件"
+		echo "删除组件的临时文件"
         if [ "$TMP_COM_DIR" != "" ];then
                 if [ ! -d $TMP_COM_DIR ];then
                         createdir $TMP_COM_DIR
@@ -717,5 +717,6 @@ com_install "${CURRENT_COMPONENTS[*]}"
 mod_install "${CURRENT_MODULES[*]}"
 
 #清理临时文件夹
-tmp_clear
-
+if [ "${CURRENT_IS_NO_CLEAR}" == '0' ];then
+	tmp_clear
+fi
