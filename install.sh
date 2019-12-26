@@ -521,6 +521,7 @@ com_replace(){
 		com_file_replace '{COM_DATA_CACHE_DIR}' "${COM_DATA_CACHE_DIR}" $_path
 		com_file_replace '{COM_DATA_SCRIPT_DIR}' "${COM_DATA_SCRIPT_DIR}" $_path
 		com_file_replace '{COM_DATA_LOG_DIR}' "${COM_DATA_LOG_DIR}" $_path
+		com_file_replace '{CPU_NUM}' "${CPU_NUM}" $_path
 	done 
 }
 
@@ -639,11 +640,11 @@ EOT
     fi
 
     #优化网络参数
-    grep "^#Sys Options$" /etc/sysctl.conf >/dev/null
+    grep "^#patch by zeroai-utils$" /etc/sysctl.conf >/dev/null
     if [ $? != 0 ]; then
 
         cat >>/etc/sysctl.conf<<EOF
-#Sys Options
+#patch by zeroai-utils
 net.ipv4.ip_forward = 0
 net.ipv4.conf.default.rp_filter = 1
 net.ipv4.conf.default.accept_source_route = 0
@@ -683,11 +684,11 @@ EOF
 
 
     #优化文件描述符
-    grep "^#Sys Options$" /etc/security/limits.conf >/dev/null
+    grep "^#patch by zeroai-utils$" /etc/security/limits.conf >/dev/null
     if [ $? != 0 ]; then
 
         cat >>/etc/security/limits.conf<<EOF
-#Sys Options
+#patch by zeroai-utils
 *               soft     nproc         65536
 *               hard     nproc         65536
 
@@ -709,7 +710,6 @@ EOF
 	ntpdate cn.pool.ntp.org
 	hwclock --systohc
 fi
-
 	
 com_install "${CURRENT_COMPONENTS[*]}"
 
