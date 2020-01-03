@@ -140,7 +140,7 @@ PKG_COMPONENT_DIR=${PKG_DIR}component/
 
 
 #临时解压与安装目录
-TMP_DIR=/tmp/
+TMP_DIR=/tmp/zeroai/zeroai-utils/
 #组件临时目录
 TMP_COM_DIR=${TMP_DIR}component/
 #模块临时目录
@@ -264,7 +264,7 @@ user_add(){
 	if [ "$_u" == "" ];then
 		_u=$_g;
 	fi
-	
+
 	if [ `cat /etc/group|grep "^${_g}:"|wc -l` -eq "0" ];then
 		groupadd $_g
 	fi
@@ -281,7 +281,7 @@ createdir(){
 		return;
 	fi
         for _p in $@;
-        do	
+        do
         	if [ -d "$_p" ];then
 			continue;
 		fi
@@ -294,7 +294,6 @@ yum_install(){
 	local _i="";
 	local _wpn=`yum list installed`;
         for _i in $@; do
-        	echo $_i
 			if [ `echo $_wpn|tr " " "\n"|grep -e "^${_i}"|wc -l` -eq "0" ];then
 				echo $_i
 				yum -y install $_i;
@@ -355,7 +354,7 @@ _SOURCE_PKG_CONF=""
 pkg_conf_get(){
 	echo $SOURCE_URL"pkg.cnf"
 	if [ "${_SOURCE_PKG_CONF}" == "" ];then
-		echo 
+		echo
 		if [ `curl -s -i $SOURCE_URL"pkg.cnf"|grep 'HTTP/1.1 200 OK'|wc -l` == '0' ];then
 			error "url connect timeout! ${SOURCE_URL}"
 		fi
@@ -369,7 +368,7 @@ com_source_get() {
 	local _cdir=$2
 	local cName="${SOURCE_SYSTEM}-component-${_cname}"
 	local _pkgfile="${PKG_COMPONENT_DIR}${cName}.zip"
-	
+
 	if [ ! -f "${_pkgfile}" ];then
 		pkg_conf_get
 		if [ `pkg_conf_get|grep ${cName}|wc -l` == "0" ];then
@@ -385,7 +384,7 @@ com_source_get() {
 		else
 			mkdir -m 777 -p $_tmpDir
 		fi
-		
+
 		local _pkgurl="${SOURCE_URL}pkg/"
 		local _zipfiles=(`curl -s ${_pkgurl}${cName}".cnf"|tr "\n" " "`)
 		cd $_tmpDir
@@ -407,8 +406,8 @@ com_install(){
 
         local _com;
         for _com in $1;
-        do      
-                
+        do
+
                 COM_NAME=$_com
                 COM_DIR="$SOURCE_COMPONENT_DIR$_com/"
                 COM_PACKAGE_DIR="${COM_DIR}package/"
@@ -427,36 +426,36 @@ com_install(){
                         	error "组件${_com}安装失败,目录${COM_DIR}不存在!"
                         fi
                 fi
-                
+
                 if [ ! -f $COM_INSTALL_FILE ]; then
                         error "组件${_com}安装失败,${COM_INSTALL_FILE}不存在!"
                 fi
-                
+
                 com_tmp_init
- 
-          	echo "安装组件包：${_com}开始";                        
+
+          	echo "安装组件包：${_com}开始";
           	cd $CURRENT_DIR
                 . $COM_INSTALL_SCRIPT
                 echo "安装组件包：${_com}结束";
-                sleep 2  
-                
-                
+                sleep 2
+
+
                 COM_NAME=$_com
                 COM_DIR=""
 				COM_PACKAGE_DIR=""
 				COM_SOURCE_FILE=""
-				COM_CONF_DIR="" 
+				COM_CONF_DIR=""
 				COM_INSTALL_SCRIPT=""
 				COM_INSTALL_DIR=""
                 COM_DATA_CONF_DIR=""
                 COM_DATA_DB_DIR=""
-                COM_DATA_SCRIPT_DIR=""		
+                COM_DATA_SCRIPT_DIR=""
                 COM_DATA_LOG_DIR=""
                 COM_DATA_CACHE_DIR=""
         done
-        
+
         com_tmp_init
-        
+
 }
 
 
@@ -507,7 +506,7 @@ com_file_replace(){
 	local _t=$2
 	local _path=$3
 	_t=${_t//\//\\\/}
-	sed -i "s/${_s}/${_t}/g" $_path	
+	sed -i "s/${_s}/${_t}/g" $_path
 }
 com_replace(){
 	for _path in "$@"
@@ -522,14 +521,14 @@ com_replace(){
 		com_file_replace '{COM_DATA_SCRIPT_DIR}' "${COM_DATA_SCRIPT_DIR}" $_path
 		com_file_replace '{COM_DATA_LOG_DIR}' "${COM_DATA_LOG_DIR}" $_path
 		com_file_replace '{CPU_NUM}' "${CPU_NUM}" $_path
-	done 
+	done
 }
 
 com_install_test(){
 	if [ ! -e "${COM_INSTALL_DIR}" ];then
 		error "${COM_NAME} installation failed: the installation path ${COM_INSTALL_DIR} is not exists!"
 	fi
-	
+
 	for _path in $@
 	do
 		if [ ! -e "$_path" ];then
@@ -563,14 +562,14 @@ mod_install(){
                 if [ ! -d $MOD_DIR ];then
                         error "模块${_mod}安装失败,目录${MOD_DIR}不存在!"
                 fi
-                
+
                 if [ ! -f $MOD_INSTALL_FILE ]; then
                         error "模块${_mod}安装失败,${MOD_INSTALL_FILE}不存在!"
                 fi
-                
+
                 mod_tmp_init
-                
-                echo "安装模块：${_mod}开始";                        
+
+                echo "安装模块：${_mod}开始";
                 cd $CURRENT_DIR
                 . $MOD_INSTALL_SCRIPT
                 echo "安装模块：${_mod}结束";
@@ -579,8 +578,8 @@ mod_install(){
                 MOD_DIR=""
                 MOD_NAME=""
                 MOD_PACKAGE_DIR=""
-                MOD_CONF_DIR=""  
-                MOD_INSTALL_SCRIPT=""            
+                MOD_CONF_DIR=""
+                MOD_INSTALL_SCRIPT=""
         done
         mod_tmp_init
 }
@@ -611,7 +610,7 @@ createdir $DATA_DIR $DATA_BAK_DIR
 
 #创建PKG文件夹
 createdir $PKG_DIR $PKG_COMPONENT_DIR $PKG_MODULE_DIR
-	
+
 #创建SOURCE文件夹
 createdir $SOURCE_DIR $SOURCE_COMPONENT_DIR $SOURCE_MODULE_DIR
 
@@ -705,12 +704,12 @@ EOF
 	#安装必须的包
 	yum_install make gd-devel flex bison file libtool libtool-libs autoconf ntp ntpdate net-snmp-devel  readline-devel net-snmp net-snmp-utils psmisc net-tools iptraf ncurses-devel  iptraf wget curl patch make gcc gcc-c++  kernel-devel unzip zip pigz
 	yum_install pcre-devel openssl-devel
-	
+
 	#同步时间
 	ntpdate cn.pool.ntp.org
 	hwclock --systohc
 fi
-	
+
 com_install "${CURRENT_COMPONENTS[*]}"
 
 
