@@ -5,11 +5,19 @@ Zeroai-Utils README
 ===========
 
   Zeroai-Utils 是一个CentOS 7.x下的运维环境工具包。
+
   安装方式: 源码编译为主。
-  注重性能。
+
+  侧重点:   注重性能。
 
   推荐系统: CentOS 7.x minimal
-  推荐基础硬件: CPU 4/8核，内存16/32G，硬盘SSD+HDD。
+
+  推荐基础硬件:
+  			CPU 4/8核，
+
+  			内存16/32G，
+
+  			硬盘SSD+HDD。
 
 安装方式
 =======
