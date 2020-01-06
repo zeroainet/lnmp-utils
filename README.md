@@ -14,9 +14,7 @@ Zeroai-Utils README
 
   推荐基础硬件:
   			CPU 4/8核，
-
   			内存16/32G，
-
   			硬盘SSD+HDD。
 
 安装方式
