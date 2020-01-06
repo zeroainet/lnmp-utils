@@ -13,8 +13,14 @@ Zeroai-Utils README
 
 安装方式
 =======
-.. code-block:: shell
+```shell
    git clone https://github.com/zeroainet/zeroai-utils.git
+```
 
+使用方式
+=======
+```shell
    #安装
+   cd zeroai-utils
    ./install.sh -c php,redis,mysql,memcached,openresty
+```
