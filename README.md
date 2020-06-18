@@ -39,6 +39,19 @@ Zeroai-Utils README
 
 ```
 
+组件源与扩展
+=======
+公共组件源: https://github.com/zeroainet/zeroai-utils-components.git
+中国地区的组件源 https://e.coding.net/zeroai/zeroai-utils-components.git
+更改组件源
+
+```shell
+vi ./install.conf
+修改 SOURCE_URL=https://github.com/zeroainet/zeroai-utils-components.git
+```
+可以自定义扩展组件
+
+
 安装方式
 =======
 ```shell
