@@ -4,12 +4,12 @@ Zeroai-Utils README
 简介
 ===========
 
-  ZeroAI-Utils 是一个Linux CentOS-7.x x86_64的运维环境一键安装工具包.
-  主要集成了openresty(nginx)+Mysql+PHP+Redis为核心的运维环境。
+  ZeroAI-Utils
+  Linux(CentOS7X_64) +openresty(nginx)+Mysql+PHP+Redis一键安装包.
 
   安装方式: 源码编译.
 
-  优势:   注重性能。
+  优势: 注重性能，适合生产环境使用。
 
   推荐系统: CentOS 7.x 64 minimal
 
