@@ -24,7 +24,7 @@ Zeroai-Utils README
    openresty(nginx+lua) 1.15.8.2 https://github.com/openresty/openresty.git
        High Performance Web Platform Based on Nginx and LuaJIT
    mysql                8.0.18 https://github.com/mysql/mysql-server.git
-       MySQL Server, the world's most popular open source database, and MySQL Cluster, a real-time, open source transactional database.
+       MySQL Server, the worlds most popular open source database, and MySQL Cluster, a real-time, open source transactional database.
    php                  7.3.10 http://php.net
        PHP语言环境
    redis                5.0.7 http://redis.io/
