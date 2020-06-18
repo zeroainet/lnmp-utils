@@ -5,6 +5,7 @@ Zeroai-Utils README
 ===========
 
   ZeroAI-Utils
+
   Linux(CentOS7X_64) +openresty(nginx)+Mysql+PHP+Redis一键安装包.
 
   安装方式: 源码编译.
