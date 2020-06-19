@@ -8,6 +8,10 @@ Zeroai-Utils README
 
   Linux(CentOS7X_64) +openresty(nginx)+Mysql+PHP+Redis一键安装包.
 
+  服务于PHP轻量级框架的生产环境
+
+  项目地址: https://github.com/zeroainet/zeroai-php.git
+
   安装方式: 源码编译.
 
   优势: 注重性能，适合生产环境使用。
