@@ -18,8 +18,8 @@ PATH=/usr/local/bin:/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/sbin:~/bin
 export PATH
 
 #检查Linux版本
-if [ ! -f /etc/centos-release ] || [ `cat /etc/centos-release|grep -i "CentOS Linux release 7\." |wc -l` -eq "0" ];then
-	echo '必须运行在CentOS7系统环境!'
+if [ ! -f /etc/centos-release ] || [ `cat /etc/centos-release|grep -e "CentOS Linux release 7\." -e "CentOS Linux release 8\."  |wc -l` -eq "0" ];then
+	echo '必须运行在CentOS7 OR CentOS8系统环境!'
 	exit
 fi
 
