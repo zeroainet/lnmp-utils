@@ -1,10 +1,10 @@
-Zeroai-Utils README
+lnmp-utils README
 ============
 
 简介
 ===========
 
-  ZeroAI-Utils
+  lnmp-Utils
 
   Linux(CentOS7X_64) +openresty(nginx)+Mysql+PHP+Redis一键安装包.
 
@@ -51,15 +51,15 @@ Zeroai-Utils README
 
 组件源与扩展
 =======
-公共组件源:  https://github.com/zeroainet/zeroai-utils-components.git
+公共组件源:  https://github.com/zeroainet/lnmp-utils-components.git
 
-中国地区的组件源: https://e.coding.net/zeroai/zeroai-utils-components.git
+中国地区的组件源: https://e.coding.net/zeroai/lnmp-utils-components.git
 
 更改组件源
 
 ```shell
 vi ./install.conf
-修改 SOURCE_URL=https://github.com/zeroainet/zeroai-utils-components.git
+修改 SOURCE_URL=https://github.com/zeroainet/lnmp-utils-components.git
 ```
 可以自定义扩展组件
 
@@ -67,13 +67,13 @@ vi ./install.conf
 安装方式
 =======
 ```shell
-   git clone https://github.com/zeroainet/zeroai-utils.git
+   git clone https://github.com/zeroainet/lnmp-utils.git
 ```
 
 使用方式
 =======
 ```shell
    #安装
-   cd zeroai-utils
+   cd lnmp-utils
    ./install.sh -c php,redis,mysql,memcached,openresty
 ```
