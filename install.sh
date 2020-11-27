@@ -1,6 +1,10 @@
 #!/bin/bash
 
-#zeroai-utils
+#路径安排
+PATH=/usr/local/bin:/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/sbin:~/bin
+export PATH
+
+#lnmp-utils
 
 #global setting
 #数据目录
@@ -11,11 +15,9 @@ INSTALL_DIR=/usr/local/
 
 #源地址
 SOURCE_SYSTEM="centos7"
-#SOURCE_URL="https://raw.githubusercontent.com/zeroainet/zeroai-utils-components/master/";
-SOURCE_URL="https://zeroai.coding.net/p/zeroai-utils-components/d/zeroai-utils-components/git/raw/master/"
-#路径安排
-PATH=/usr/local/bin:/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/sbin:~/bin
-export PATH
+#SOURCE_URL="https://raw.githubusercontent.com/zeroainet/lnmp-utils-components/master/";
+SOURCE_URL="https://zeroai.coding.net/p/lnmp-utils-components/d/lmnp-utils-components/git/raw/master/"
+
 
 #检查Linux版本
 if [ ! -f /etc/centos-release ] || [ `cat /etc/centos-release|grep -e "CentOS Linux release 7\." -e "CentOS Linux release 8\."  |wc -l` -eq "0" ];then
